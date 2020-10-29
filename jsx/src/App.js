@@ -8,13 +8,14 @@ function getButtonText() {
 function App() {
   const text = "Hello!";
   const objText = { text: "There!" };
+  const style = { backgroundColor: "blue", color: "white" };
   return (
     <div>
-      <button style={{ backgroundColor: "blue", color: "white" }}>
-        {getButtonText()}
-      </button>
+      <button style={style}>{getButtonText()}</button>
       {text}
-      {objText.text}
+      {
+        objText.text /* can't directly put an object reference here, need to point to a property of an object */
+      }
     </div>
   );
 }
