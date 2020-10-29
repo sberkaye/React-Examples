@@ -7,7 +7,7 @@ function getButtonText() {
 
 function App() {
   const text = "Hello!";
-  const objText = { text: "There!" };
+  const objText = { text: " There!" };
   const style = { backgroundColor: "blue", color: "white" };
   return (
     <div>
