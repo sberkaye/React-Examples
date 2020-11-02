@@ -21,7 +21,7 @@ class App extends React.Component {
       return <div>Error: {this.state.errorMessage}</div>;
     }
 
-    return <Spinner />;
+    return <Spinner message="Please accept location request" />;
   }
 }
 
