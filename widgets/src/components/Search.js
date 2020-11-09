@@ -6,6 +6,8 @@ const Search = () => {
   const [debouncedTerm, setDebouncedTerm] = useState(term);
   const [results, setResults] = useState([]);
 
+  // This hook is responsible for updating the other hooks dependency array, so that
+  // it fetches the data and causes a re-render
   useEffect(() => {
     const timerID = setTimeout(() => {
       setDebouncedTerm(term);
@@ -15,6 +17,7 @@ const Search = () => {
     };
   }, [term]);
 
+  // This hook is responsible for fetching the data
   useEffect(() => {
     const search = async () => {
       const { data } = await axios.get("https://en.wikipedia.org/w/api.php", {
