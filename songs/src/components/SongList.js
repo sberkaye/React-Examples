@@ -7,8 +7,10 @@ class SongList extends Component {
   }
 }
 
+// this method will be called whenever the store is updated
 const mapStateToProps = (state) => {
   return { songs: state.songs };
 };
 
+// this creates a wrapped component and "connects" it to Redux store
 export default connect(mapStateToProps)(SongList);
