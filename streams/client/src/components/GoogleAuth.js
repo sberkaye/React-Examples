@@ -32,7 +32,7 @@ class GoogleAuth extends Component {
   // this callback will get isSignedIn as an argument from our auth object
   handleAuthChange = (isSignedIn) => {
     if (isSignedIn) {
-      this.props.signIn();
+      this.props.signIn(this.auth.currentUser.get().getId());
     } else {
       this.props.signOut();
     }
