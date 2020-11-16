@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
+import { connect } from "react-redux";
+import { createStream } from "../../actions";
 
 class StreamCreate extends Component {
   renderError = ({ touched, error }) => {
@@ -22,7 +24,7 @@ class StreamCreate extends Component {
   };
 
   handleFormSubmit = (formValues) => {
-    console.log(formValues);
+    this.props.createStream(formValues);
   };
 
   render() {
@@ -65,10 +67,12 @@ const validate = (formValues) => {
 // Field components, they will dispatch redux actions to update the piece of state
 // that is named with the "form" property of the config object. The config object also
 // provides validation method for the form inputs before updating the state with them.
-export default reduxForm({
+const formWrapped = reduxForm({
   // the name of your form and the key to where your form's state will be mounted
   // under the redux-form reducer
   form: "streamCreate",
   // validation method
   validate,
 })(StreamCreate);
+
+export default connect(null, { createStream })(formWrapped);
