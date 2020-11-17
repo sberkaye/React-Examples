@@ -11,7 +11,7 @@ const StreamDelete = (props) => {
   // Component isolation
   useEffect(() => {
     props.fetchStream(id);
-  }, []);
+  }, [props, id]);
   const actions = (
     <>
       <button
