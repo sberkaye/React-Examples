@@ -6,6 +6,7 @@ import { fetchStream, editStream } from "../../actions";
 import StreamForm from "./StreamForm";
 
 class StreamEdit extends Component {
+  // Component Isolation - this component needs to fetch its own data
   componentDidMount() {
     this.props.fetchStream(this.props.match.params.id);
   }
