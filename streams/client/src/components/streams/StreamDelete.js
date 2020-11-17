@@ -1,19 +1,28 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import Modal from "../Modal";
 import history from "../../history";
-import { fetchStream } from "../../actions";
+import { fetchStream, deleteStream } from "../../actions";
 
 const StreamDelete = (props) => {
+  const { id } = props.match.params;
   // Component isolation
   useEffect(() => {
-    props.fetchStream(props.match.params.id);
+    props.fetchStream(id);
   }, []);
   const actions = (
     <>
-      <button className="ui button negative">Delete</button>
-      <button className="ui button">Cancel</button>
+      <button
+        onClick={() => props.deleteStream(id)}
+        className="ui button negative"
+      >
+        Delete
+      </button>
+      <Link to="/" className="ui button">
+        Cancel
+      </Link>
     </>
   );
   const renderContent = () => {
@@ -36,4 +45,6 @@ const mapStateToProps = (state, ownProps) => {
   return { stream: state.streams[ownProps.match.params.id] };
 };
 
-export default connect(mapStateToProps, { fetchStream })(StreamDelete);
+export default connect(mapStateToProps, { fetchStream, deleteStream })(
+  StreamDelete
+);
