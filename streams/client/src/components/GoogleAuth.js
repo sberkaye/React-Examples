@@ -2,9 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { signIn, signOut } from "../actions";
-
-const CLIENT_ID =
-  "1039097660264-7adirsvjkn234a4a7gl5jcugrcfplh30.apps.googleusercontent.com";
+import { GOOGLE_CLIENT_ID } from "../credentials";
 
 class GoogleAuth extends Component {
   // Initialize Google API library with OAuth client ID
@@ -13,7 +11,7 @@ class GoogleAuth extends Component {
       // this callback will be called after Google API finishes loading the required library
       window.gapi.client
         .init({
-          clientId: CLIENT_ID,
+          clientId: GOOGLE_CLIENT_ID,
           scope: "email",
         })
         .then(() => {
@@ -29,7 +27,9 @@ class GoogleAuth extends Component {
 
   // Event listeners
 
-  // this callback will get isSignedIn as an argument from our auth object
+  // this callback will get isSignedIn as an argument from our auth object and will run
+  // whenever this.auth.isSignedIn changes because it is assigned as the event listener
+  // by the "listen" method above.
   handleAuthChange = (isSignedIn) => {
     if (isSignedIn) {
       this.props.signIn(this.auth.currentUser.get().getId());
@@ -47,6 +47,8 @@ class GoogleAuth extends Component {
   };
 
   renderAuthButton() {
+    // There is a small time window before the ".then()" callback of init method runs,
+    //  so in that time frame "isSignedIn" will hold its default value of "null"
     if (this.props.isSignedIn === null) {
       return null;
     } else if (this.props.isSignedIn) {
