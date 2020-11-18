@@ -23,6 +23,12 @@ class StreamShow extends React.Component {
     this.buildPlayer();
   }
 
+  // When the user stops viewing the video, stop trying to stream the video and
+  // detach the player from the video element in the DOM
+  componentWillUnmount() {
+    this.flvPlayer.destroy();
+  }
+
   // build the flv player with the correct id and load it
   buildPlayer = () => {
     // if we don't have the stream or the player has already been built, return
